@@ -29,3 +29,23 @@ O App foi desenvolvido com as seguintes tecnologias:
 - `Coil`: Upload de imagens
 - `ML Kit Identificação de Idiomas`: Identificar o idioma de textos
 - `ML Kit Tradução de Idiomas`: Traduzir o idioma de textos
+
+<h1>Acesso ao projeto</h1>
+
+Você pode acessar o [código fonte do projeto](https://github.com/StevenMTung/Redegram) ou [baixá-lo](https://github.com/StevenMTung/Redegram/archive/refs/heads/main.zip).
+
+<h1>Abrir e rodar o projeto</h1> 
+
+Após baixar o projeto, você pode abrir com o `Android Studio`. Para isso, na tela de launcher clique em:
+
+- `Open an Existing Project` (ou alguma opção similar);
+- Procure o local onde o projeto está e o selecione (Caso o projeto seja baixado via zip, é necessário extraí-lo antes de procurá-lo);
+- Por fim clique em `OK`.
+
+O `Android Studio` deve executar algumas tasks do *Gradle* para configurar o projeto, aguarde até finalizar. Ao finalizar as tasks, você pode executar o App 🏆 
+
+<h1>Autor</h1>
+
+ [<img loading="lazy" src="https://avatars.githubusercontent.com/u/134224337?v=4" width=115><br><sub>Steven Marc Tung</sub>](https://github.com/StevenMTung)
+| :---: | 
+
