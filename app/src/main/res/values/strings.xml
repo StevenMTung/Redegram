@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Redegram</string>
+    <string name="comment">Comentários</string>
+    <string name="responder">Responder</string>
+    <string name="ver_traducao">Ver tradução</string>
+    <string name="adicione_um_comentario">Adicione um comentário…</string>
+    <string name="traduzindo">Traduzindo...</string>
+    <string name="ver_original">Ver original</string>
+</resources>
