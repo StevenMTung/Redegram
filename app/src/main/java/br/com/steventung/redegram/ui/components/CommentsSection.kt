@@ -52,7 +52,8 @@ fun CommentsSection(
     onCommentLiked: (String) -> Unit = {},
     userImage: Int,
     onCommentTextChanged: (String) -> Unit = {},
-    onTranslateComment: (Comment) -> Unit = {}
+    onTranslateComment: (Comment) -> Unit = {},
+    onSendComment: () -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -92,7 +93,8 @@ fun CommentsSection(
                 .padding(8.dp),
             userImage = userImage,
             commentText = userCommentText,
-            onCommentTextChanged = onCommentTextChanged
+            onCommentTextChanged = onCommentTextChanged,
+            onSendComment = onSendComment
         )
     }
 }

@@ -28,6 +28,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.steventung.redegram.R
 import br.com.steventung.redegram.data.samples.Samples
 import br.com.steventung.redegram.domain.model.Comment
 import br.com.steventung.redegram.domain.model.Post
@@ -46,7 +47,8 @@ fun HomeScreen(
     onCommentLiked: (String) -> Unit = {},
     onCommentTextChanged: (String) -> Unit = {},
     onTranslateComment: (Comment) -> Unit = {},
-    onTranslatePostDescription: (Post) -> Unit = {}
+    onTranslatePostDescription: (Post) -> Unit = {},
+    onSendComment: () -> Unit = {}
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val scaffoldState = rememberBottomSheetScaffoldState()
@@ -77,14 +79,18 @@ fun HomeScreen(
             val maxSheetHeight = screenHeight - 30.dp
             CommentsSection(
                 userCommentText = state.commentText,
-                userImage = state.postAuthorImage,
+                userImage = state.userProfile?.userImage ?: R.drawable.default_profile_picture,
                 commentsLists = state.commentsList,
                 modifier = Modifier
                     .height(maxSheetHeight)
                     .navigationBarsPadding(),
                 onCommentLiked = onCommentLiked,
                 onCommentTextChanged = onCommentTextChanged,
-                onTranslateComment = onTranslateComment
+                onTranslateComment = onTranslateComment,
+                onSendComment = {
+                    onSendComment()
+                    keyboardController?.hide()
+                }
             )
         },
         sheetPeekHeight = sheetPeekHeight,

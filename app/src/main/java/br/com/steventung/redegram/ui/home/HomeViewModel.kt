@@ -27,8 +27,17 @@ class HomeViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     init {
+        getUserProfile()
         loadPostsList()
         identifyLocalLanguage()
+    }
+
+    private fun getUserProfile() {
+        viewModelScope.launch {
+            postRepository.getUserProfile().collect { user ->
+                _uiState.update { it.copy(userProfile = user) }
+            }
+        }
     }
 
     private fun loadPostsList() {
@@ -83,7 +92,6 @@ class HomeViewModel @Inject constructor(
                             commentsList = selectedPost.comments,
                             isShowCommentSection = true,
                             commentListPostId = selectedPost.postId,
-                            postAuthorImage = selectedPost.authorPostImage
                         )
                     }
                 }
@@ -95,7 +103,7 @@ class HomeViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 isShowCommentSection = false,
-                commentListPostId = -1L,
+                commentListPostId = null,
                 commentText = ""
             )
         }
@@ -119,10 +127,10 @@ class HomeViewModel @Inject constructor(
             } else comment
         }
         _uiState.update { it.copy(commentsList = commentsList) }
-        if (_uiState.value.commentListPostId > 0) {
+        _uiState.value.commentListPostId?.let {
             postRepository.setCommentLike(
                 commentId = commentId,
-                postId = _uiState.value.commentListPostId
+                postId = it
             )
         }
     }
@@ -228,6 +236,27 @@ class HomeViewModel @Inject constructor(
                 Log.i("HomeViewModel", "Falha na tradução")
             }
         )
+    }
+
+    fun createComment() {
+        _uiState.value.userProfile?.let { user ->
+            val newComment = Comment(
+                authorId = user.userId,
+                authorName = user.userName,
+                authorImage = user.userImage,
+                content = _uiState.value.commentText
+            )
+            val updatedPostCommentsList = _uiState.value.commentsList.toMutableList()
+            updatedPostCommentsList.add(newComment)
+            _uiState.update { it.copy(commentsList = updatedPostCommentsList, commentText = "") }
+
+            _uiState.value.commentListPostId?.let {
+                postRepository.addNewCommentToPostCommentsList(
+                    postId = it,
+                    newComment = newComment
+                )
+            }
+        }
     }
 }
 

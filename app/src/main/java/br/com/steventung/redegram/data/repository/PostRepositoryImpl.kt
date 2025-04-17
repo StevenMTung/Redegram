@@ -1,7 +1,9 @@
 package br.com.steventung.redegram.data.repository
 
 import br.com.steventung.redegram.data.samples.Samples
+import br.com.steventung.redegram.domain.model.Comment
 import br.com.steventung.redegram.domain.model.Post
+import br.com.steventung.redegram.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 class PostRepositoryImpl(
@@ -21,5 +23,13 @@ class PostRepositoryImpl(
 
     override fun getPostById(postId: Long): Flow<Post?> {
         return samples.getPostById(postId)
+    }
+
+    override fun getUserProfile(): Flow<User> {
+        return samples.getUserProfile()
+    }
+
+    override fun addNewCommentToPostCommentsList(postId: Long, newComment: Comment) {
+        samples.addNewCommentToPostCommentsList(postId, newComment)
     }
 }

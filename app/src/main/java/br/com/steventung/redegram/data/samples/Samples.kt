@@ -4,6 +4,7 @@ import android.util.Log
 import br.com.steventung.redegram.R
 import br.com.steventung.redegram.domain.model.Comment
 import br.com.steventung.redegram.domain.model.Post
+import br.com.steventung.redegram.domain.model.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -388,5 +389,26 @@ class Samples {
         Log.i("Samples", "postList: $_postsList")
         val postsList = _postsList.toMutableList()
         emit(postsList.find { it.postId == postId })
+    }
+
+    private val userProfile = User(
+        userId = "james@email.com",
+        userName = "james_137",
+        userImage = R.drawable.user_photo
+    )
+
+    fun getUserProfile() = flow {
+        emit(userProfile)
+    }
+
+    fun addNewCommentToPostCommentsList(postId: Long, newComment: Comment) {
+        val updatedPostsList = _postsList.map { post ->
+            if (post.postId == postId) {
+                val updatedPostCommentsList = post.comments.toMutableList()
+                updatedPostCommentsList.add(newComment)
+                post.copy(comments = updatedPostCommentsList)
+            } else post
+        }.toMutableList()
+        _postsList = updatedPostsList
     }
 }

@@ -75,7 +75,9 @@ fun NavGraphBuilder.homeGraph(
                         translationState = TranslateState.NotTranslated
                     )
                 }
-
+            },
+            onSendComment = {
+                viewModel.createComment()
             }
         )
     }
