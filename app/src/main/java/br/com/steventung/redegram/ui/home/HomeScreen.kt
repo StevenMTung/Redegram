@@ -43,7 +43,7 @@ fun HomeScreen(
     onLikePost: (Post) -> Unit = {},
     onOpenComments: (Post) -> Unit = {},
     onHideCommentsSection: () -> Unit = {},
-    onCommentLiked: (Long) -> Unit = {},
+    onCommentLiked: (String) -> Unit = {},
     onCommentTextChanged: (String) -> Unit = {},
     onTranslateComment: (Comment) -> Unit = {},
     onTranslatePostDescription: (Post) -> Unit = {}

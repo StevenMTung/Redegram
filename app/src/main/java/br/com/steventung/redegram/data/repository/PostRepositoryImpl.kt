@@ -15,7 +15,7 @@ class PostRepositoryImpl(
         samples.setLikePost(post)
     }
 
-    override fun setCommentLike(commentId: Long, postId: Long) {
+    override fun setCommentLike(commentId: String, postId: Long) {
         samples.setLikeComment(commentId, postId)
     }
 

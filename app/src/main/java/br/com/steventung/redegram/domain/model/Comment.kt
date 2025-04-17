@@ -1,7 +1,9 @@
 package br.com.steventung.redegram.domain.model
 
+import java.util.UUID
+
 data class Comment(
-    val commentId: Long,
+    val commentId: String = UUID.randomUUID().toString(),
     val authorId: String,
     val authorImage: Int,
     val authorName: String,

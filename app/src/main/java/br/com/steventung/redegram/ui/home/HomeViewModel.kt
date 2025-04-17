@@ -101,7 +101,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun setCommentLike(commentId: Long) {
+    fun setCommentLike(commentId: String) {
         val commentsList = _uiState.value.commentsList.map { comment ->
             if (comment.commentId == commentId) {
                 when (comment.isCommentLiked) {

@@ -20,7 +20,6 @@ class Samples {
                 postTotalLikes = 90,
                 comments = listOf(
                     Comment(
-                        commentId = 1,
                         authorId = "michael@email.com",
                         authorImage = R.drawable.perfil_alemao,
                         authorName = "michael-muller",
@@ -29,7 +28,6 @@ class Samples {
                         isCommentLiked = true
                     ),
                     Comment(
-                        commentId = 2,
                         authorId = "park@email.com",
                         authorImage = R.drawable.perfil_coreana,
                         authorName = "parkYuna",
@@ -38,49 +36,42 @@ class Samples {
                         isCommentLiked = true
                     ),
                     Comment(
-                        commentId = 3,
                         authorId = "john@email.com",
                         authorImage = R.drawable.perfil_americano,
                         authorName = "johnwilliams",
                         content = "Brazilian barbecue is really unique!!",
                     ),
                     Comment(
-                        commentId = 27,
                         authorId = "mikoto@email.com",
                         authorImage = R.drawable.perfil_japonesa,
                         authorName = "mikoto_k",
                         content = "冷たいビールはお肉によく合います！\uD83D\uDE0A",
                     ),
                     Comment(
-                        commentId = 28,
                         authorId = "hector@email.com",
                         authorImage = R.drawable.perfil_espanhol,
                         authorName = "hector-garcia",
                         content = "¡Qué buena elección! Pero yo cambiaría la cerveza por vino, jajajaja. \uD83C\uDF77",
                     ),
                     Comment(
-                        commentId = 29,
                         authorId = "andrei@email.com",
                         authorImage = R.drawable.perfil_russo,
                         authorName = "andrei22",
                         content = "Вот как нужно делать бразильское барбекю!\uD83E\uDD69\uD83D\uDD25",
                     ),
                     Comment(
-                        commentId = 30,
                         authorId = "maria@email.com",
                         authorImage = R.drawable.perfil_libanesa,
                         authorName = "maria_j_n",
                         content = "هذه الصورة جعلتني أشعر بالجوع! \uD83D\uDE0B\uD83D\uDCF8",
                     ),
                     Comment(
-                        commentId = 31,
                         authorId = "amelie@email.com",
                         authorImage = R.drawable.perfil_francesa,
                         authorName = "amelie-bernard",
                         content = "Tes posts de barbecue me donnent faim à chaque fois ! \uD83C\uDF56\uD83D\uDE04",
                     ),
                     Comment(
-                        commentId = 32,
                         authorId = "lee@email.com",
                         authorImage = R.drawable.perfil_chines,
                         authorName = "mingLee",
@@ -100,14 +91,12 @@ class Samples {
                 postTotalLikes = 225,
                 comments = listOf(
                     Comment(
-                        commentId = 4,
                         authorId = "andrei@email.com",
                         authorImage = R.drawable.perfil_russo,
                         authorName = "andrei22",
                         content = "Какой шикарный автомобиль! Выглядит просто мощно и стильно.",
                     ),
                     Comment(
-                        commentId = 5,
                         authorId = "mikoto@email.com",
                         authorImage = R.drawable.perfil_japonesa,
                         authorName = "mikoto_k",
@@ -127,21 +116,18 @@ class Samples {
                 postTotalLikes = 89,
                 comments = listOf(
                     Comment(
-                        commentId = 6,
                         authorId = "maria@email.com",
                         authorImage = R.drawable.perfil_libanesa,
                         authorName = "maria_j_n",
                         content = "يا له من كلب جميل! إنه يشبه الثعلب الصغير.\uD83E\uDD8A",
                     ),
                     Comment(
-                        commentId = 7,
                         authorId = "hector@email.com",
                         authorImage = R.drawable.perfil_espanhol,
                         authorName = "hector-garcia",
                         content = "¡Qué ternura! Ese perrito es simplemente adorable.",
                     ),
                     Comment(
-                        commentId = 8,
                         authorId = "robson@email.com",
                         authorImage = R.drawable.perfil_brasileiro,
                         authorName = "robson_silva",
@@ -160,14 +146,12 @@ class Samples {
                 postTotalLikes = 120,
                 comments = listOf(
                     Comment(
-                        commentId = 9,
                         authorId = "john@email.com",
                         authorImage = R.drawable.perfil_americano,
                         authorName = "johnwilliams",
                         content = "What an amazing photo! The composition, the lighting... everything is just perfect",
                     ),
                     Comment(
-                        commentId = 10,
                         authorId = "mikoto@email.com",
                         authorImage = R.drawable.perfil_japonesa,
                         authorName = "mikoto_k",
@@ -185,21 +169,18 @@ class Samples {
                 postTotalLikes = 450,
                 comments = listOf(
                     Comment(
-                        commentId = 11,
                         authorId = "amelie@email.com",
                         authorImage = R.drawable.perfil_francesa,
                         authorName = "amelie-bernard",
                         content = "Comment as-tu pris cette photo ? Elle est tout simplement parfaite !!",
                     ),
                     Comment(
-                        commentId = 12,
                         authorId = "michael@email.com",
                         authorImage = R.drawable.perfil_alemao,
                         authorName = "michael-muller",
                         content = "So ein wunderschöner Moment – der Tukan sieht aus wie aus einem Märchen.",
                     ),
                     Comment(
-                        commentId = 13,
                         authorId = "lee@email.com",
                         authorImage = R.drawable.perfil_chines,
                         authorName = "mingLee",
@@ -219,21 +200,18 @@ class Samples {
                 postTotalLikes = 220,
                 comments = listOf(
                     Comment(
-                        commentId = 14,
                         authorId = "amelie@email.com",
                         authorImage = R.drawable.perfil_francesa,
                         authorName = "amelie-bernard",
                         content = "Ton bébé est absolument adorable ! Je suis tellement heureuse pour toi, ma chère amie. Quelle merveille !",
                     ),
                     Comment(
-                        commentId = 15,
                         authorId = "park@email.com",
                         authorImage = R.drawable.perfil_coreana,
                         authorName = "parkYuna",
                         content = "아기가 정말 사랑스러워요! 이렇게 예쁜 천사를 보게 돼서 너무 기뻐요. 진심으로 축하해요!",
                     ),
                     Comment(
-                        commentId = 16,
                         authorId = "lee@email.com",
                         authorImage = R.drawable.perfil_chines,
                         authorName = "mingLee",
@@ -253,7 +231,6 @@ class Samples {
                 postTotalLikes = 536,
                 comments = listOf(
                     Comment(
-                        commentId = 17,
                         authorId = "andrei@email.com",
                         authorImage = R.drawable.perfil_russo,
                         authorName = "andrei22",
@@ -271,21 +248,18 @@ class Samples {
                 postTotalLikes = 154,
                 comments = listOf(
                     Comment(
-                        commentId = 18,
                         authorId = "robson@email.com",
                         authorImage = R.drawable.perfil_brasileiro,
                         authorName = "robson_silva",
                         content = "Quando puder, venha visitar as praias do Brasil. Temos as melhores praias do mundo!",
                     ),
                     Comment(
-                        commentId = 19,
                         authorId = "andrei@email.com",
                         authorImage = R.drawable.perfil_russo,
                         authorName = "andrei22",
                         content = "Какая потрясающая фотография! Море, солнце и песок — просто мечта.",
                     ),
                     Comment(
-                        commentId = 20,
                         authorId = "maria@email.com",
                         authorImage = R.drawable.perfil_libanesa,
                         authorName = "maria_j_n",
@@ -305,14 +279,12 @@ class Samples {
                 postTotalLikes = 75,
                 comments = listOf(
                     Comment(
-                        commentId = 21,
                         authorId = "mikoto@email.com",
                         authorImage = R.drawable.perfil_japonesa,
                         authorName = "mikoto_k",
                         content = "なんて素敵な写真！ここは日本で一番好きな場所です。",
                     ),
                     Comment(
-                        commentId = 22,
                         authorId = "amelie@email.com",
                         authorImage = R.drawable.perfil_francesa,
                         authorName = "amelie-bernard",
@@ -332,28 +304,24 @@ class Samples {
                 postTotalLikes = 422,
                 comments = listOf(
                     Comment(
-                        commentId = 23,
                         authorId = "john@email.com",
                         authorImage = R.drawable.perfil_americano,
                         authorName = "johnwilliams",
                         content = "Seriously, this dish turned out amazing! You’re really talented in the kitchen — I’d love to try this again sometime!",
                     ),
                     Comment(
-                        commentId = 24,
                         authorId = "park@email.com",
                         authorImage = R.drawable.perfil_coreana,
                         authorName = "parkYuna",
                         content = "나중에 꼭 레시피 보내줘! 나 이탈리아 음식 정말 좋아해!",
                     ),
                     Comment(
-                        commentId = 25,
                         authorId = "michael@email.com",
                         authorImage = R.drawable.perfil_alemao,
                         authorName = "michael-muller",
                         content = "Teile das Rezept mit uns, mein Freund! Schon beim Anblick dieses Fotos bekomme ich Hunger.",
                     ),
                     Comment(
-                        commentId = 26,
                         authorId = "andrei@email.com",
                         authorImage = R.drawable.perfil_russo,
                         authorName = "andrei22",
@@ -390,7 +358,7 @@ class Samples {
             }
     }
 
-    fun setLikeComment(commentId: Long, postId: Long) {
+    fun setLikeComment(commentId: String, postId: Long) {
         val postsList = _postsList.map { post ->
             if (post.postId == postId) {
                 post.copy(comments = post.comments.map { comment ->

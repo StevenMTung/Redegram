@@ -49,7 +49,7 @@ fun CommentsSection(
     userCommentText: String,
     modifier: Modifier = Modifier,
     commentsLists: List<Comment>,
-    onCommentLiked: (Long) -> Unit = {},
+    onCommentLiked: (String) -> Unit = {},
     userImage: Int,
     onCommentTextChanged: (String) -> Unit = {},
     onTranslateComment: (Comment) -> Unit = {}
@@ -101,7 +101,7 @@ fun CommentsSection(
 fun CommentItem(
     modifier: Modifier = Modifier,
     comment: Comment,
-    onCommentLiked: (Long) -> Unit = {},
+    onCommentLiked: (String) -> Unit = {},
     onTranslateComment: () -> Unit = {}
 ) {
     Row(
@@ -231,7 +231,6 @@ fun CommentItem(
 private fun CommentItemPreview() {
     CommentItem(
         comment = Comment(
-            commentId = 21,
             authorId = "mikoto@email.com",
             authorImage = R.drawable.perfil_japonesa,
             authorName = "mikoto_k",
@@ -248,7 +247,6 @@ private fun CommentsSectionPreview() {
         userImage = 1,
         commentsLists = listOf(
             Comment(
-                commentId = 21,
                 authorId = "mikoto@email.com",
                 authorImage = 1,
                 authorName = "mikoto_k",
@@ -257,7 +255,6 @@ private fun CommentsSectionPreview() {
                 isCommentLiked = true
             ),
             Comment(
-                commentId = 22,
                 authorId = "amelie@email.com",
                 authorImage = 1,
                 authorName = "amelie-bernard",
