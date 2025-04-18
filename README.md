@@ -12,6 +12,7 @@ As postagens e os comentários foram feitos em idiomas diferentes e a partir das
 - `Curtir Posts`: Cada publicação apresenta a opção de marcar ou desmarcar a curtida clicando no "ícone do coração".
 - `Acessar Caixa de Comentários`: Cada publicação apresenta uma caixa de comentários que pode ser acessada clicando no "ícone de comentários".
 - `Curtir Comentários`: Cada comentário apresenta a opção de marcar ou desmarcar a curtida clicando no "ícone do coração".
+- `Adicionar Comentários`: Para cada publicação é possível adicionar comentários.
 - `Identificação e Tradução de Idiomas da Descrição do Post`: Ao clicar em **"Ver tradução"** é possível identificar e traduzir o idioma da descrição das publicações para o idioma em que o dispositivo móvel está configurado.
 - `Retornar a Descrição para o idioma Original do Post`: Também é possível retornar a descrição traduzida para o idioma original da publicação ao clicar em **"Ver original"**.
 - `Identificação e Tradução de Idiomas dos Comentários do Post`: Ao clicar em **"Ver tradução"** é possível identificar e traduzir o idioma dos comentários das publicações para o idioma em que o dispositivo móvel está configurado.
