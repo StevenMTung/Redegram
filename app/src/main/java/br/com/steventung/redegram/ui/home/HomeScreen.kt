@@ -5,11 +5,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetValue
@@ -20,6 +25,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -36,7 +42,7 @@ import br.com.steventung.redegram.ui.components.CommentsSection
 import br.com.steventung.redegram.ui.components.PostItem
 import br.com.steventung.redegram.ui.components.RedegramTopAppBar
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
     state: HomeUiState,
@@ -48,7 +54,8 @@ fun HomeScreen(
     onCommentTextChanged: (String) -> Unit = {},
     onTranslateComment: (Comment) -> Unit = {},
     onTranslatePostDescription: (Post) -> Unit = {},
-    onSendComment: () -> Unit = {}
+    onSendComment: () -> Unit = {},
+    onRefreshingScreen: () -> Unit = {}
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val scaffoldState = rememberBottomSheetScaffoldState()
@@ -97,58 +104,72 @@ fun HomeScreen(
         sheetShadowElevation = 1.dp,
         sheetTonalElevation = 1.dp,
     ) {
-        LazyColumn(
-            modifier = Modifier
-                .navigationBarsPadding()
-                .fillMaxSize()
-                .background(
-                    Color.Black.copy(
-                        alpha = (if (state.isShowCommentSection) 0.80f else 0f)
-                    )
-                )
-                .graphicsLayer(
-                    alpha = if (state.isShowCommentSection) 0.3f else 1f,
-                )
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null
-                ) {
-                    if (state.isShowCommentSection) {
-                        onHideCommentsSection()
-                    }
-                },
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            userScrollEnabled = !state.isShowCommentSection
-        ) {
-            items(state.postsList) { post ->
-                PostItem(
-                    post = post,
-                    onPostDescriptionExpandedChanged = { postId, isExpanded ->
-                        if (!state.isShowCommentSection) {
-                            onPostDescriptionExpandedChanged(postId, isExpanded)
-                        } else {
-                            onHideCommentsSection()
-                        }
-                    },
-                    onLikePost = {
-                        if (!state.isShowCommentSection) {
-                            onLikePost(it)
-                        } else {
-                            onHideCommentsSection()
-                        }
-                    },
-                    onOpenComments = {
-                        if (!state.isShowCommentSection) {
-                            onOpenComments(post)
-                        } else {
-                            onHideCommentsSection()
-                        }
-                    },
-                    onTranslatePostDescription = {
-                        onTranslatePostDescription(post)
-                    }
-                )
+        val pullRefreshState = rememberPullRefreshState(
+            refreshing = state.isScreenRefreshing,
+            onRefresh = {
+                onRefreshingScreen()
             }
+        )
+        Box(modifier = Modifier.fillMaxSize()) {
+            LazyColumn(
+                modifier = Modifier
+                    .navigationBarsPadding()
+                    .fillMaxSize()
+                    .pullRefresh(state = pullRefreshState)
+                    .background(
+                        Color.Black.copy(
+                            alpha = (if (state.isShowCommentSection) 0.80f else 0f)
+                        )
+                    )
+                    .graphicsLayer(
+                        alpha = if (state.isShowCommentSection) 0.3f else 1f,
+                    )
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null
+                    ) {
+                        if (state.isShowCommentSection) {
+                            onHideCommentsSection()
+                        }
+                    },
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                userScrollEnabled = !state.isShowCommentSection
+            ) {
+                items(state.postsList) { post ->
+                    PostItem(
+                        post = post,
+                        onPostDescriptionExpandedChanged = { postId, isExpanded ->
+                            if (!state.isShowCommentSection) {
+                                onPostDescriptionExpandedChanged(postId, isExpanded)
+                            } else {
+                                onHideCommentsSection()
+                            }
+                        },
+                        onLikePost = {
+                            if (!state.isShowCommentSection) {
+                                onLikePost(it)
+                            } else {
+                                onHideCommentsSection()
+                            }
+                        },
+                        onOpenComments = {
+                            if (!state.isShowCommentSection) {
+                                onOpenComments(post)
+                            } else {
+                                onHideCommentsSection()
+                            }
+                        },
+                        onTranslatePostDescription = {
+                            onTranslatePostDescription(post)
+                        }
+                    )
+                }
+            }
+            PullRefreshIndicator(
+                refreshing = state.isScreenRefreshing,
+                state = pullRefreshState,
+                modifier = Modifier.align(Alignment.TopCenter)
+            )
         }
     }
 }

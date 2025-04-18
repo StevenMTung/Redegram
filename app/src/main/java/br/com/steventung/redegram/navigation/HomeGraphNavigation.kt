@@ -78,6 +78,9 @@ fun NavGraphBuilder.homeGraph(
             },
             onSendComment = {
                 viewModel.createComment()
+            },
+            onRefreshingScreen = {
+                viewModel.reloadPostsList()
             }
         )
     }

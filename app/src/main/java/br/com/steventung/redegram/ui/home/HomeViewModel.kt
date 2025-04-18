@@ -10,6 +10,7 @@ import br.com.steventung.redegram.domain.model.Post
 import br.com.steventung.redegram.domain.model.TranslateState
 import br.com.steventung.redegram.mlkit.TextTranslate
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -257,6 +258,19 @@ class HomeViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun reloadPostsList() {
+        viewModelScope.launch {
+            setRefreshingScreenState(true)
+            delay(2000)
+            loadPostsList()
+            setRefreshingScreenState(false)
+        }
+    }
+
+    private fun setRefreshingScreenState(isRefreshing: Boolean) {
+        _uiState.update { it.copy(isScreenRefreshing = isRefreshing) }
     }
 }
 

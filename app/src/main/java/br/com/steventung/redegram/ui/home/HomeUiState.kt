@@ -12,5 +12,6 @@ data class HomeUiState(
     val commentListPostId: Long? = null,
     val userProfile: User? = null,
     val commentText: String = "",
-    val localLanguage: Language = Language(languageCode = "pt", languageName = "português")
+    val localLanguage: Language = Language(languageCode = "pt", languageName = "português"),
+    val isScreenRefreshing: Boolean = false
 )
