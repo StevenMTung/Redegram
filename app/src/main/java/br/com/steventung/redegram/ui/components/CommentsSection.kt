@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -50,10 +51,10 @@ fun CommentsSection(
     commentsLists: List<Comment>,
     onCommentLiked: (String) -> Unit = {},
     onTranslateComment: (Comment) -> Unit = {},
+    lazyColumnState: LazyListState = rememberLazyListState()
 ) {
-    val lazyColumnState = rememberLazyListState()
     Column(
-        modifier = modifier,
+        modifier = modifier.padding(bottom = 74.dp),
     ) {
         Text(
             modifier = Modifier

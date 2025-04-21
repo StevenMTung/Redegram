@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -19,7 +19,6 @@ import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberBottomSheetScaffoldState
@@ -68,7 +67,7 @@ fun HomeScreen(
     val scaffoldState = rememberBottomSheetScaffoldState()
     val availableHeight = rememberWindowHeight()
     val sheetPeekHeight by animateDpAsState(
-        targetValue = if (state.isShowCommentSection) 350.dp else 0.dp,
+        targetValue = if (state.isShowCommentSection) 450.dp else 0.dp,
         label = "Peek height"
     )
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -85,136 +84,125 @@ fun HomeScreen(
     }
     val lazyColumnState = rememberLazyListState()
     val scope = rememberCoroutineScope()
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize(),
-        containerColor = Color.White,
-        bottomBar = {
-            if (state.isShowCommentSection) {
-                ReplyCommentItem(
-                    modifier = Modifier
-                        .padding(top = 8.dp),
-                    userImage = state.userProfile?.userImage ?: R.drawable.default_profile_picture,
-                    commentText = state.commentText,
-                    onCommentTextChanged = onCommentTextChanged,
-                    onSendComment = {
-                        scope.launch {
-                            onSendComment()
-                            keyboardController?.hide()
-                            if (state.commentsList.isNotEmpty()) {
-                                lazyColumnState.animateScrollToItem(0)
-                            }
-                        }
-                    }
-                )
-            }
-        }
-    ) { paddingValues ->
-
-        val pullRefreshState = rememberPullRefreshState(
-            refreshing = state.isScreenRefreshing,
-            onRefresh = {
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = state.isScreenRefreshing,
+        onRefresh = {
+            if (!state.isShowCommentSection) {
                 onRefreshingScreen()
             }
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+        }
+    )
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .imePadding()
+    ) {
+        Column(
+            modifier = Modifier.pullRefresh(state = pullRefreshState)
         ) {
-            Column(modifier = Modifier.pullRefresh(state = pullRefreshState)) {
-                BottomSheetScaffold(
-                    scaffoldState = scaffoldState,
-                    modifier = Modifier
-                        .nestedScroll(scrollBehavior.nestedScrollConnection),
-                    topBar = { RedegramTopAppBar(scrollBehavior = scrollBehavior) },
-                    containerColor = Color.White,
-                    sheetContent = {
-                        val maxSheetHeight = availableHeight - 90.dp
-                        CommentsSection(
-                            commentsLists = state.commentsList,
-                            modifier = Modifier
-                                .height(maxSheetHeight),
-                            onCommentLiked = onCommentLiked,
-                            onTranslateComment = onTranslateComment,
-                        )
-                    },
-                    sheetPeekHeight = sheetPeekHeight,
-                    sheetShadowElevation = 1.dp,
-                    sheetTonalElevation = 1.dp,
-                    sheetContainerColor = Color.White
-                ) {
-
-                    LazyColumn(
+            BottomSheetScaffold(
+                scaffoldState = scaffoldState,
+                modifier = Modifier
+                    .nestedScroll(scrollBehavior.nestedScrollConnection),
+                topBar = { RedegramTopAppBar(scrollBehavior = scrollBehavior) },
+                containerColor = Color.White,
+                sheetContent = {
+                    CommentsSection(
+                        lazyColumnState = lazyColumnState,
+                        commentsLists = state.commentsList,
                         modifier = Modifier
-                            .fillMaxSize()
-                            .background(
-                                Color.Black.copy(
-                                    alpha = (if (state.isShowCommentSection) 0.80f else 0f)
-                                )
+                            .height(availableHeight),
+                        onCommentLiked = onCommentLiked,
+                        onTranslateComment = onTranslateComment,
+                    )
+                },
+                sheetPeekHeight = sheetPeekHeight,
+                sheetShadowElevation = 1.dp,
+                sheetTonalElevation = 1.dp,
+                sheetContainerColor = Color.White
+            ) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            Color.Black.copy(
+                                alpha = (if (state.isShowCommentSection) 0.80f else 0f)
                             )
-                            .graphicsLayer(
-                                alpha = if (state.isShowCommentSection) 0.3f else 1f,
-                            )
-                            .clickable(
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = null
-                            ) {
-                                if (state.isShowCommentSection) {
+                        )
+                        .graphicsLayer(
+                            alpha = if (state.isShowCommentSection) 0.3f else 1f,
+                        )
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null
+                        ) {
+                            if (state.isShowCommentSection) {
+                                onHideCommentsSection()
+                            }
+                        },
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    userScrollEnabled = !state.isShowCommentSection
+                ) {
+                    items(state.postsList) { post ->
+                        PostItem(
+                            post = post,
+                            onPostDescriptionExpandedChanged = { postId, isExpanded ->
+                                if (!state.isShowCommentSection) {
+                                    onPostDescriptionExpandedChanged(postId, isExpanded)
+                                } else {
                                     onHideCommentsSection()
                                 }
                             },
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                        userScrollEnabled = !state.isShowCommentSection
-                    ) {
-                        items(state.postsList) { post ->
-                            PostItem(
-                                post = post,
-                                onPostDescriptionExpandedChanged = { postId, isExpanded ->
-                                    if (!state.isShowCommentSection) {
-                                        onPostDescriptionExpandedChanged(postId, isExpanded)
-                                    } else {
-                                        onHideCommentsSection()
-                                    }
-                                },
-                                onLikePost = {
-                                    if (!state.isShowCommentSection) {
-                                        onLikePost(post)
-                                    } else {
-                                        onHideCommentsSection()
-                                    }
-                                },
-                                onOpenComments = {
-                                    if (!state.isShowCommentSection) {
-                                        onOpenComments(post)
-                                    } else {
-                                        onHideCommentsSection()
-                                    }
-                                },
-                                onTranslatePostDescription = {
-                                    onTranslatePostDescription(post)
-                                },
-                                onDoubleTapLike = {
-                                    if (!state.isShowCommentSection){
-                                        onDoubleTapLike(post)
-                                    } else {
-                                        onHideCommentsSection()
-                                    }
-                                },
-                                onTapImagePost = onHideCommentsSection
-                            )
-                        }
+                            onLikePost = {
+                                if (!state.isShowCommentSection) {
+                                    onLikePost(post)
+                                } else {
+                                    onHideCommentsSection()
+                                }
+                            },
+                            onOpenComments = {
+                                if (!state.isShowCommentSection) {
+                                    onOpenComments(post)
+                                } else {
+                                    onHideCommentsSection()
+                                }
+                            },
+                            onTranslatePostDescription = {
+                                onTranslatePostDescription(post)
+                            },
+                            onDoubleTapLike = {
+                                onDoubleTapLike(post)
+                            },
+                            onTapImagePost = onHideCommentsSection
+                        )
                     }
-
                 }
             }
-
+        }
+        if (state.isShowCommentSection) {
+            ReplyCommentItem(
+                userImage = state.userProfile?.userImage ?: R.drawable.default_profile_picture,
+                commentText = state.commentText,
+                onCommentTextChanged = onCommentTextChanged,
+                onSendComment = {
+                    scope.launch {
+                        onSendComment()
+                        keyboardController?.hide()
+                        if (state.commentsList.isNotEmpty()) {
+                            lazyColumnState.animateScrollToItem(0)
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .align(alignment = Alignment.BottomCenter)
+            )
+        }
+        if (!state.isShowCommentSection) {
             PullRefreshIndicator(
                 refreshing = state.isScreenRefreshing,
                 state = pullRefreshState,
                 modifier = Modifier.align(Alignment.TopCenter)
             )
-
         }
     }
 }
