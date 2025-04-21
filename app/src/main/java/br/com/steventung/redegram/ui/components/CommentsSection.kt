@@ -11,12 +11,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -46,19 +46,14 @@ import coil3.compose.AsyncImage
 
 @Composable
 fun CommentsSection(
-    userCommentText: String,
     modifier: Modifier = Modifier,
     commentsLists: List<Comment>,
     onCommentLiked: (String) -> Unit = {},
-    userImage: Int,
-    onCommentTextChanged: (String) -> Unit = {},
     onTranslateComment: (Comment) -> Unit = {},
-    onSendComment: () -> Unit = {}
 ) {
+    val lazyColumnState = rememberLazyListState()
     Column(
-        modifier = modifier
-            .imePadding()
-            .fillMaxHeight(),
+        modifier = modifier,
     ) {
         Text(
             modifier = Modifier
@@ -74,13 +69,13 @@ fun CommentsSection(
             color = Color.LightGray
         )
         LazyColumn(
+            state = lazyColumnState,
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
+                .fillMaxWidth(),
             contentPadding = PaddingValues(8.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(commentsLists) { comment ->
+            items(commentsLists.reversed()) { comment ->
                 CommentItem(
                     comment = comment,
                     onCommentLiked = onCommentLiked,
@@ -88,14 +83,6 @@ fun CommentsSection(
                 )
             }
         }
-        ReplyCommentItem(
-            modifier = Modifier
-                .padding(8.dp),
-            userImage = userImage,
-            commentText = userCommentText,
-            onCommentTextChanged = onCommentTextChanged,
-            onSendComment = onSendComment
-        )
     }
 }
 
@@ -199,7 +186,7 @@ fun CommentItem(
         Column(
             modifier = Modifier
                 .fillMaxHeight()
-                .offset(y = 10.dp),
+                .offset(y = 18.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
@@ -245,8 +232,6 @@ private fun CommentItemPreview() {
 @Composable
 private fun CommentsSectionPreview() {
     CommentsSection(
-        userCommentText = "Teste de comentário",
-        userImage = 1,
         commentsLists = listOf(
             Comment(
                 authorId = "mikoto@email.com",

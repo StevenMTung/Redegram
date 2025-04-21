@@ -13,12 +13,12 @@ class PostRepositoryImpl(
         return samples.getPosts()
     }
 
-    override fun setLikePost(post: Post) {
-        samples.setLikePost(post)
+    override fun setPostLike(post: Post) {
+        samples.setPostLike(post)
     }
 
     override fun setCommentLike(commentId: String, postId: Long) {
-        samples.setLikeComment(commentId, postId)
+        samples.setCommentLike(commentId, postId)
     }
 
     override fun getPostById(postId: Long): Flow<Post?> {

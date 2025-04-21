@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PostRepository {
     fun getPosts(): Flow<List<Post>>
-    fun setLikePost(post: Post)
+    fun setPostLike(post: Post)
     fun setCommentLike(commentId: String, postId: Long)
     fun getPostById(postId: Long): Flow<Post?>
     fun getUserProfile(): Flow<User>

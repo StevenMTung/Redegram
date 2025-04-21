@@ -13,5 +13,5 @@ data class HomeUiState(
     val userProfile: User? = null,
     val commentText: String = "",
     val localLanguage: Language = Language(languageCode = "pt", languageName = "português"),
-    val isScreenRefreshing: Boolean = false
+    val isScreenRefreshing: Boolean = false,
 )

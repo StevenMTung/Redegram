@@ -1,5 +1,7 @@
 package br.com.steventung.redegram.ui.components
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ControlPoint
@@ -7,6 +9,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.PermIdentity
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -54,30 +57,37 @@ fun RedegramBottomAppBar(
     onItemsChanged: (BottomAppBarItem) -> Unit = {},
     currentDestination: String = AppDestination.Home.route
 ) {
-    NavigationBar(modifier = modifier) {
-        items.forEach {
-            val icon = it.icon
-            val isSelected = it.destination.route == currentDestination
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = null,
-                        modifier = Modifier.size(if (isSelected) 34.dp else 30.dp)
+    Column {
+        HorizontalDivider(
+            modifier = Modifier.fillMaxWidth(),
+            thickness = 0.2.dp,
+            color = Color.LightGray
+        )
+        NavigationBar(modifier = modifier, containerColor = Color.White) {
+            items.forEach {
+                val icon = it.icon
+                val isSelected = it.destination.route == currentDestination
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = null,
+                            modifier = Modifier.size(if (isSelected) 34.dp else 30.dp)
+                        )
+                    },
+                    selected = isSelected,
+                    onClick = { onItemsChanged(it) },
+                    colors = NavigationBarItemColors(
+                        selectedIconColor = Color.Black,
+                        selectedTextColor = Color.Transparent,
+                        selectedIndicatorColor = Color.Transparent,
+                        unselectedIconColor = Color.DarkGray,
+                        unselectedTextColor = Color.Transparent,
+                        disabledIconColor = Color.Transparent,
+                        disabledTextColor = Color.Transparent
                     )
-                },
-                selected = isSelected,
-                onClick = { onItemsChanged(it) },
-                colors = NavigationBarItemColors(
-                    selectedIconColor = Color.Black,
-                    selectedTextColor = Color.Transparent,
-                    selectedIndicatorColor = Color.Transparent,
-                    unselectedIconColor = Color.DarkGray,
-                    unselectedTextColor = Color.Transparent,
-                    disabledIconColor = Color.Transparent,
-                    disabledTextColor = Color.Transparent
                 )
-            )
+            }
         }
     }
 }

@@ -27,6 +27,7 @@ import br.com.steventung.redegram.R
 @Composable
 fun RedegramTopAppBar(modifier: Modifier = Modifier, scrollBehavior: TopAppBarScrollBehavior) {
     TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(Color.White),
         modifier = modifier,
         title = {
             Text(

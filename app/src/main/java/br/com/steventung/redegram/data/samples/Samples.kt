@@ -339,7 +339,7 @@ class Samples {
         emit(_postsList)
     }
 
-    fun setLikePost(post: Post) {
+    fun setPostLike(post: Post) {
         val currentPostList = _postsList.toMutableList()
         currentPostList.indexOfFirst { it.postId == post.postId }.takeIf { it != -1 }
             ?.let { index ->
@@ -359,29 +359,25 @@ class Samples {
             }
     }
 
-    fun setLikeComment(commentId: String, postId: Long) {
-        val postsList = _postsList.map { post ->
-            if (post.postId == postId) {
-                post.copy(comments = post.comments.map { comment ->
-                    if (comment.commentId == commentId) {
-                        if (comment.isCommentLiked) {
-                            comment.copy(
-                                isCommentLiked = false,
-                                commentTotalLikes = comment.commentTotalLikes - 1
-                            )
-                        } else {
-                            comment.copy(
-                                isCommentLiked = true,
-                                commentTotalLikes = comment.commentTotalLikes + 1
-                            )
-                        }
-                    } else comment
-                }
+    fun setCommentLike(commentId: String, postId: Long) {
+        val postsList = _postsList.toMutableList()
+        val postIndex = postsList.indexOfFirst { it.postId == postId }
+        if (postIndex != -1) {
+            val currentPost = postsList[postIndex]
+            val currentCommentsListOfSelectedPost = currentPost.comments.toMutableList()
+            val commentIndex =
+                currentCommentsListOfSelectedPost.indexOfFirst { it.commentId == commentId }
+            if (commentIndex != -1) {
+                val currentComment = currentCommentsListOfSelectedPost[commentIndex]
+                val updatedComment = currentComment.copy(
+                    isCommentLiked = !currentComment.isCommentLiked,
+                    commentTotalLikes = if (currentComment.isCommentLiked) currentComment.commentTotalLikes - 1 else currentComment.commentTotalLikes + 1
                 )
-            } else {
-                post
+                currentCommentsListOfSelectedPost[commentIndex] = updatedComment
+                val updatedPost = currentPost.copy(comments = currentCommentsListOfSelectedPost)
+                postsList[postIndex] = updatedPost
             }
-        }.toMutableList()
+        }
         _postsList = postsList
     }
 
@@ -402,13 +398,15 @@ class Samples {
     }
 
     fun addNewCommentToPostCommentsList(postId: Long, newComment: Comment) {
-        val updatedPostsList = _postsList.map { post ->
-            if (post.postId == postId) {
-                val updatedPostCommentsList = post.comments.toMutableList()
-                updatedPostCommentsList.add(newComment)
-                post.copy(comments = updatedPostCommentsList)
-            } else post
-        }.toMutableList()
-        _postsList = updatedPostsList
+        val postsList = _postsList.toMutableList()
+        val postIndex = postsList.indexOfFirst { it.postId == postId }
+        if (postIndex != -1) {
+            val currentPost = postsList[postIndex]
+            val currentCommentsListOfSelectedPost = currentPost.comments.toMutableList()
+            currentCommentsListOfSelectedPost.add(newComment)
+            val updatedPost = currentPost.copy(comments = currentCommentsListOfSelectedPost)
+            postsList[postIndex] = updatedPost
+        }
+        _postsList = postsList
     }
 }

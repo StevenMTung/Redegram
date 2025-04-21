@@ -30,7 +30,7 @@ fun NavGraphBuilder.homeGraph(
                 viewModel.setPostDescriptionExpanded(postId, isDescriptionExpanded)
             },
             onLikePost = { post ->
-                viewModel.setLikePost(post)
+                viewModel.setPostLike(post)
             },
             onOpenComments = { post ->
                 viewModel.loadPostComments(post.postId)
@@ -81,6 +81,9 @@ fun NavGraphBuilder.homeGraph(
             },
             onRefreshingScreen = {
                 viewModel.reloadPostsList()
+            },
+            onDoubleTapLike = { post ->
+                viewModel.setPostLike(post)
             }
         )
     }

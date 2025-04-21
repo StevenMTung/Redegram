@@ -12,5 +12,6 @@ data class Post(
     val isPostDescriptionExpanded: Boolean = false,
     val postTotalLikes: Int,
     val postIsLiked: Boolean = false,
+    val isShowLikeHeart: Boolean = false,
     val comments: List<Comment>
 )

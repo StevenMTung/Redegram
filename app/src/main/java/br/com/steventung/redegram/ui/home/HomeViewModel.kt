@@ -71,16 +71,19 @@ class HomeViewModel @Inject constructor(
         _uiState.update { it.copy(postsList = postsList) }
     }
 
-    fun setLikePost(post: Post) {
-        postRepository.setLikePost(post)
-        val postsList = _uiState.value.postsList.map {
-            if (it.postId == post.postId) {
-                when (post.postIsLiked) {
-                    true -> it.copy(postIsLiked = false, postTotalLikes = post.postTotalLikes - 1)
-                    false -> it.copy(postIsLiked = true, postTotalLikes = post.postTotalLikes + 1)
+    fun setPostLike(selectedPost: Post) {
+        postRepository.setPostLike(selectedPost)
+        val postsList = _uiState.value.postsList.toMutableList()
+        postsList.indexOfFirst { it.postId == selectedPost.postId }
+            .takeIf { it != -1 }?.let { index ->
+                val updatedPost = postsList[index].let {
+                    it.copy(
+                        postIsLiked = !it.postIsLiked,
+                        postTotalLikes = if (it.postIsLiked) it.postTotalLikes - 1 else it.postTotalLikes + 1
+                    )
                 }
-            } else it
-        }
+                postsList[index] = updatedPost
+            }
         _uiState.update { it.copy(postsList = postsList) }
     }
 
@@ -111,28 +114,24 @@ class HomeViewModel @Inject constructor(
     }
 
     fun setCommentLike(commentId: String) {
-        val commentsList = _uiState.value.commentsList.map { comment ->
-            if (comment.commentId == commentId) {
-                when (comment.isCommentLiked) {
-                    true -> comment.copy(
-                        isCommentLiked = false,
-                        commentTotalLikes = comment.commentTotalLikes - 1
-                    )
-
-                    false -> comment.copy(
-                        isCommentLiked = true,
-                        commentTotalLikes = comment.commentTotalLikes + 1
-                    )
+        val commentsList = _uiState.value.commentsList.toMutableList()
+        val index = commentsList.indexOfFirst { it.commentId == commentId }
+        if (index != -1) {
+            val currentComment = commentsList[index]
+            val updatedComment = currentComment.copy(
+                isCommentLiked = !currentComment.isCommentLiked,
+                commentTotalLikes = if (currentComment.isCommentLiked) {
+                    currentComment.commentTotalLikes - 1
+                } else {
+                    currentComment.commentTotalLikes + 1
                 }
-
-            } else comment
+            )
+            commentsList[index] = updatedComment
         }
         _uiState.update { it.copy(commentsList = commentsList) }
+
         _uiState.value.commentListPostId?.let {
-            postRepository.setCommentLike(
-                commentId = commentId,
-                postId = it
-            )
+            postRepository.setCommentLike(commentId = commentId, postId = it)
         }
     }
 
@@ -145,26 +144,32 @@ class HomeViewModel @Inject constructor(
         identifyLanguageAndTranslate(
             text = selectedComment.content,
             onTranslateSuccess = { translatedComment ->
-                val updateCommentsList = _uiState.value.commentsList.map { comment ->
-                    if (comment.commentId == selectedComment.commentId) {
-                        comment.copy(
-                            translatedContent = translatedComment,
-                            translateState = TranslateState.Translated
-                        )
-                    } else comment
+                val commentsList = _uiState.value.commentsList.toMutableList()
+                val index = commentsList.indexOfFirst { it.commentId == selectedComment.commentId }
+                if (index != -1) {
+                    val currentComment = commentsList[index]
+                    val updatedComment = currentComment.copy(
+                        translatedContent = translatedComment,
+                        translateState = TranslateState.Translated
+                    )
+                    commentsList[index] = updatedComment
                 }
-                _uiState.update { it.copy(commentsList = updateCommentsList) }
+                _uiState.update { it.copy(commentsList = commentsList) }
             }
         )
     }
 
     fun setCommentTranslationState(selectedComment: Comment, translationState: TranslateState) {
-        val updatedCommentsList = _uiState.value.commentsList.map { comment ->
-            if (comment.commentId == selectedComment.commentId) {
-                comment.copy(translateState = translationState)
-            } else comment
+        val commentsList = _uiState.value.commentsList.toMutableList()
+        val index = commentsList.indexOfFirst { it.commentId == selectedComment.commentId }
+        if (index != -1) {
+            val currentComment = commentsList[index]
+            val updatedComment = currentComment.copy(
+                translateState = translationState
+            )
+            commentsList[index] = updatedComment
         }
-        _uiState.update { it.copy(commentsList = updatedCommentsList) }
+        _uiState.update { it.copy(commentsList = commentsList) }
     }
 
     fun postDescriptionTranslation(selectedPost: Post) {
@@ -175,15 +180,17 @@ class HomeViewModel @Inject constructor(
         identifyLanguageAndTranslate(
             text = selectedPost.postDescription,
             onTranslateSuccess = { translatedDescription ->
-                val updatedPostsList = _uiState.value.postsList.map { post ->
-                    if (post.postId == selectedPost.postId) {
-                        post.copy(
-                            postDescriptionTranslated = translatedDescription,
-                            postDescriptionTranslateState = TranslateState.Translated
-                        )
-                    } else post
+                val postsList = _uiState.value.postsList.toMutableList()
+                val index = postsList.indexOfFirst { it.postId == selectedPost.postId }
+                if (index != -1) {
+                    val currentPost = postsList[index]
+                    val updatedPost = currentPost.copy(
+                        postDescriptionTranslated = translatedDescription,
+                        postDescriptionTranslateState = TranslateState.Translated
+                    )
+                    postsList[index] = updatedPost
                 }
-                _uiState.update { it.copy(postsList = updatedPostsList) }
+                _uiState.update { it.copy(postsList = postsList) }
             }
         )
     }
@@ -192,12 +199,16 @@ class HomeViewModel @Inject constructor(
         selectedPost: Post,
         translationState: TranslateState
     ) {
-        val updatedPostsLists = _uiState.value.postsList.map { post ->
-            if (post.postId == selectedPost.postId) {
-                post.copy(postDescriptionTranslateState = translationState)
-            } else post
+        val postsList = _uiState.value.postsList.toMutableList()
+        val index = postsList.indexOfFirst { it.postId == selectedPost.postId }
+        if (index != -1) {
+            val currentPost = postsList[index]
+            val updatedPost = currentPost.copy(
+                postDescriptionTranslateState = translationState
+            )
+            postsList[index] = updatedPost
         }
-        _uiState.update { it.copy(postsList = updatedPostsLists) }
+        _uiState.update { it.copy(postsList = postsList) }
     }
 
     private fun identifyLanguageAndTranslate(

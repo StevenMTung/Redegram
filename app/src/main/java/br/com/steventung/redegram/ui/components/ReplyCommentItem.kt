@@ -1,6 +1,7 @@
 package br.com.steventung.redegram.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -40,7 +41,9 @@ fun ReplyCommentItem(
     onSendComment: () -> Unit = {}
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier
+            .background(color = Color.White)
+            .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
