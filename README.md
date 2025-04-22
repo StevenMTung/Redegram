@@ -16,7 +16,9 @@ As postagens e os comentários foram feitos em idiomas diferentes e a partir das
 - `Identificação e Tradução de Idiomas da Descrição do Post`: Ao clicar em **"Ver tradução"** é possível identificar e traduzir o idioma da descrição das publicações para o idioma em que o dispositivo móvel está configurado.
 - `Retornar a Descrição para o idioma Original do Post`: Também é possível retornar a descrição traduzida para o idioma original da publicação ao clicar em **"Ver original"**.
 - `Identificação e Tradução de Idiomas dos Comentários do Post`: Ao clicar em **"Ver tradução"** é possível identificar e traduzir o idioma dos comentários das publicações para o idioma em que o dispositivo móvel está configurado.
-- `Retornar o Comentário para o idioma Original do Post`: Também é possível retornar o comentário traduzido para o idioma original da publicação ao clicar em **"Ver original"**.  
+- `Retornar o Comentário para o idioma Original do Post`: Também é possível retornar o comentário traduzido para o idioma original da publicação ao clicar em **"Ver original"**.
+
+![Image](https://github.com/user-attachments/assets/e7c282a9-a29f-4805-9d88-d87da8f4f0c7)
 
 <h1>Técnicas e tecnologias utilizadas</h1>
 
