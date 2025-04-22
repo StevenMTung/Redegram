@@ -41,24 +41,28 @@ class Samples {
                         authorImage = R.drawable.perfil_americano,
                         authorName = "johnwilliams",
                         content = "Brazilian barbecue is really unique!!",
+                        commentTotalLikes = 12
                     ),
                     Comment(
                         authorId = "mikoto@email.com",
                         authorImage = R.drawable.perfil_japonesa,
                         authorName = "mikoto_k",
                         content = "冷たいビールはお肉によく合います！\uD83D\uDE0A",
+                        commentTotalLikes = 3
                     ),
                     Comment(
                         authorId = "hector@email.com",
                         authorImage = R.drawable.perfil_espanhol,
                         authorName = "hector-garcia",
                         content = "¡Qué buena elección! Pero yo cambiaría la cerveza por vino, jajajaja. \uD83C\uDF77",
+                        commentTotalLikes = 5
                     ),
                     Comment(
                         authorId = "andrei@email.com",
                         authorImage = R.drawable.perfil_russo,
                         authorName = "andrei22",
                         content = "Вот как нужно делать бразильское барбекю!\uD83E\uDD69\uD83D\uDD25",
+                        commentTotalLikes = 1
                     ),
                     Comment(
                         authorId = "maria@email.com",
@@ -71,6 +75,7 @@ class Samples {
                         authorImage = R.drawable.perfil_francesa,
                         authorName = "amelie-bernard",
                         content = "Tes posts de barbecue me donnent faim à chaque fois ! \uD83C\uDF56\uD83D\uDE04",
+                        commentTotalLikes = 4
                     ),
                     Comment(
                         authorId = "lee@email.com",
@@ -96,12 +101,14 @@ class Samples {
                         authorImage = R.drawable.perfil_russo,
                         authorName = "andrei22",
                         content = "Какой шикарный автомобиль! Выглядит просто мощно и стильно.",
+                        commentTotalLikes = 15
                     ),
                     Comment(
                         authorId = "mikoto@email.com",
                         authorImage = R.drawable.perfil_japonesa,
                         authorName = "mikoto_k",
                         content = "これが僕の夢の車です。",
+                        commentTotalLikes = 7
                     )
                 )
             ),
@@ -111,9 +118,7 @@ class Samples {
                 authorPostImage = R.drawable.perfil_coreana,
                 authorPostName = "parkYuna",
                 postImage = R.drawable.cachorro,
-                postDescription = "네 발 달린 나의 가장 친한 친구" +
-                        "아무 말 하지 않아도 날 이해해주고, 항상 내 곁을 지켜줘. 힘든 날도 너 덕분에 훨씬 더 가벼워져. 세상에서 가장 믿음직한 내 반려자가 되어줘서 고마워 \uD83D\uDC36✨" +
-                        "내 털복숭이, 사랑해 무한대로! \uD83D\uDC15",
+                postDescription = "내 가장 친한 친구! 나는 당신과 함께 하루종일 걷고 놀며 지내는 것을 좋아해요. 너는 세상에서 가장 좋은 개야!\uD83D\uDC36✨",
                 postTotalLikes = 89,
                 comments = listOf(
                     Comment(
@@ -121,18 +126,21 @@ class Samples {
                         authorImage = R.drawable.perfil_libanesa,
                         authorName = "maria_j_n",
                         content = "يا له من كلب جميل! إنه يشبه الثعلب الصغير.\uD83E\uDD8A",
+                        commentTotalLikes = 2
                     ),
                     Comment(
                         authorId = "hector@email.com",
                         authorImage = R.drawable.perfil_espanhol,
                         authorName = "hector-garcia",
                         content = "¡Qué ternura! Ese perrito es simplemente adorable.",
+                        commentTotalLikes = 9
                     ),
                     Comment(
                         authorId = "robson@email.com",
                         authorImage = R.drawable.perfil_brasileiro,
                         authorName = "robson_silva",
                         content = "Meu irmão tem um igual! Essa raça é muito carinhosa",
+                        commentTotalLikes = 1
                     )
                 )
             ),
@@ -142,8 +150,10 @@ class Samples {
                 authorPostImage = R.drawable.perfil_francesa,
                 authorPostName = "amelie-bernard",
                 postImage = R.drawable.italy,
-                postDescription = "Entre des murs anciens et des pas silencieux, chaque ruelle en Italie renferme des histoires que le temps murmure encore." +
-                        "Marcher dans ces passages étroits, c’est plonger dans un passé vivant, où chaque pierre a une mémoire et chaque fenêtre cache un secret.",
+                postDescription = "Visitare le città italiane è come passeggiare in un libro di storia." +
+                        " Ogni strada acciottolata, ogni piazza silenziosa e ogni architettura tradizionale racchiudono secoli di ricordi." +
+                        " Mi sono perso (e ritrovato) in vicoli incantevoli dove il tempo sembra essersi fermato." +
+                        " Che esperienza indimenticabile!",
                 postTotalLikes = 120,
                 comments = listOf(
                     Comment(
@@ -196,7 +206,7 @@ class Samples {
                 authorPostName = "mikoto_k",
                 postImage = R.drawable.newborn,
                 postDescription = "まだこんなに小さいのに、あなたは私の世界をすっかり変えてくれた。" +
-                        "あなたは私の一番大切な贈り物であり、光であり、地上に舞い降りた小さな天使。" +
+                        "あなたは私にとって最も大切な贈り物、私の光、私の小さな天使です。" +
                         "言葉では言い表せないほど、あなたを愛しているよ、私の娘。",
                 postTotalLikes = 220,
                 comments = listOf(
@@ -245,7 +255,7 @@ class Samples {
                 authorPostImage = R.drawable.perfil_chines,
                 authorPostName = "mingLee",
                 postImage = R.drawable.beach,
-                postDescription = "没有什么比海滩的一天更能让人忘记烦恼，想起生活其实可以很有趣。阳光、大海、沙滩，零烦恼。就是这个感觉！\uD83D\uDE0E\uD83C\uDF0A",
+                postDescription = "海灘是我最喜歡度假的地方。陽光、沙灘和大海是最好的療法！我的夢想是在海邊買一棟房子。\uD83C\uDFD6\uFE0F \uD83C\uDF1E \uD83C\uDF0A",
                 postTotalLikes = 154,
                 comments = listOf(
                     Comment(
@@ -299,9 +309,9 @@ class Samples {
                 authorPostImage = R.drawable.perfil_espanhol,
                 authorPostName = "hector-garcia",
                 postImage = R.drawable.pasta,
-                postDescription = "Cuando uno acierta en la cocina, el orgullo es real. " +
+                postDescription = "Hoy decidí aventurarme en la cocina. " +
                         "Preparé este plato con mis propias manos y quedó simplemente increíble. " +
-                        "Nada como una buena comida casera — con sabor, cariño y ese toque especial.",
+                        "Nada como una buena comida casera — con sabor y ese toque especial. ",
                 postTotalLikes = 422,
                 comments = listOf(
                     Comment(
