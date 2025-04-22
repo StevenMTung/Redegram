@@ -150,10 +150,9 @@ class Samples {
                 authorPostImage = R.drawable.perfil_francesa,
                 authorPostName = "amelie-bernard",
                 postImage = R.drawable.italy,
-                postDescription = "Visitare le città italiane è come passeggiare in un libro di storia." +
-                        " Ogni strada acciottolata, ogni piazza silenziosa e ogni architettura tradizionale racchiudono secoli di ricordi." +
-                        " Mi sono perso (e ritrovato) in vicoli incantevoli dove il tempo sembra essersi fermato." +
-                        " Che esperienza indimenticabile!",
+                postDescription = "Visiter les villes italiennes, c'est comme se promener dans un livre d'histoire." +
+                        " Chaque rue pavée, chaque place tranquille et chaque architecture traditionnelle recèlent des siècles de souvenirs." +
+                        " Je me suis perdue (et retrouvée) dans de charmantes ruelles où le temps semble s'être arrêté. Quelle expérience inoubliable !",
                 postTotalLikes = 120,
                 comments = listOf(
                     Comment(
